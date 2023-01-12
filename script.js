@@ -86,13 +86,16 @@ function getWins() {
 
 function game() {
 	for (let i = 0; i < 5; i++) {
-		console.log(`Round ${i + 1} of 5`);
+		console.log(
+			`%cRound ${i + 1} of 5`,
+			'font-size: 1.125em; font-weight: bold'
+		);
 		console.log(getWins());
 		playRound();
 	}
 
-	console.log(`%c${getWins()}`, 'font-size: 1.5em; font-weight: bold;');
-	console.log(`%c${declareWinner()}`, 'font-size: 2em; font-weight: bold;');
+	console.log(`%c${getWins()}`, 'font-size: 1.25em; font-weight: bold;');
+	console.log(`%c${declareWinner()}`, 'font-size: 1.5em; font-weight: bold;');
 }
 
 game();
