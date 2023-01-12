@@ -39,17 +39,14 @@ function getResult(userChoice, computerChoice) {
 }
 
 function displayChoices(userChoice, computerChoice) {
-	console.log('CHOICES:');
-	console.log('%cYou chose: ' + userChoice, 'color: cyan');
-	console.log('%cComputer chose: ' + computerChoice, 'color: pink');
+	console.log(
+		`User choice: ${userChoice}\nComputer choice: ${computerChoice}`
+	);
 }
 
 function displayResult(result) {
 	const { message, color } = result;
-	console.log(
-		`%c${message}`,
-		`color: ${color}; background: white; font-style: italic;`
-	);
+	console.log(`%c${message}`, `color: ${color}; font-style: italic;`);
 }
 
 function playRound() {
