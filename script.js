@@ -4,6 +4,9 @@ const possibleChoices = {
 	scissors: { beats: 'paper' },
 };
 
+let userWins = 0;
+let computerWins = 0;
+
 function getComputerChoice() {
 	const choices = Object.keys(possibleChoices);
 	return choices[Math.floor(Math.random() * choices.length)];
@@ -17,7 +20,7 @@ function getUserChoice() {
 	return userInput.toLowerCase();
 }
 
-function getResult(userChoice, computerChoice) {
+function getRoundResult(userChoice, computerChoice) {
 	if (userChoice === computerChoice) {
 		return {
 			message: "It's a tie!",
@@ -26,12 +29,14 @@ function getResult(userChoice, computerChoice) {
 	}
 
 	if (possibleChoices[userChoice].beats === computerChoice) {
+		userWins++;
 		return {
 			message: `User wins. ${userChoice} beats ${computerChoice}.`,
 			color: 'green',
 		};
 	}
 
+	computerWins++;
 	return {
 		message: `Computer wins. ${userChoice} is defeated by ${computerChoice}.`,
 		color: 'red',
@@ -57,10 +62,37 @@ function playRound() {
 		return;
 	}
 
-	const result = getResult(userChoice, computerChoice);
+	const result = getRoundResult(userChoice, computerChoice);
 
 	displayChoices(userChoice, computerChoice);
 	displayResult(result);
 }
 
-playRound();
+function declareWinner() {
+	if (userWins === computerWins) {
+		return "It's a tie!";
+	}
+
+	if (userWins > computerWins) {
+		return 'User wins the game!';
+	}
+
+	return 'Computer wins the game!';
+}
+
+function getWins() {
+	return `User wins: ${userWins} | Computer wins: ${computerWins}`;
+}
+
+function game() {
+	for (let i = 0; i < 5; i++) {
+		console.log(`Round ${i + 1} of 5`);
+		console.log(getWins());
+		playRound();
+	}
+
+	console.log(`%c${getWins()}`, 'font-size: 1.5em; font-weight: bold;');
+	console.log(`%c${declareWinner()}`, 'font-size: 2em; font-weight: bold;');
+}
+
+game();
